@@ -6,7 +6,7 @@ sealed class ApiResult<out T> {
 
     data class Success<out T>(val result: T): ApiResult<T>()
 
-    data class Error(val e: Exception) {
+    data class Error(val e: Exception): ApiResult<Nothing>() {
         val message get() = e.message
     }
 }
