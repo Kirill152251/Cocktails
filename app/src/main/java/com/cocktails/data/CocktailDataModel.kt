@@ -1,6 +1,6 @@
-package com.cocktails.domain
+package com.cocktails.data
 
-data class Cocktail(
+data class CocktailDataModel(
     val alcoholic: String,
     val category: String,
     val name: String,
