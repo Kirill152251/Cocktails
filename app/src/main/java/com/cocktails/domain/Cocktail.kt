@@ -7,5 +7,5 @@ data class Cocktail(
     val imageUrl: String,
     val glass: String,
     val instructions: String,
-    val ingredients: List<String>
+    val ingredients: String
 )

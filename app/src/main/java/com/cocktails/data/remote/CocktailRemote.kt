@@ -48,24 +48,25 @@ data class CocktailRemote(
     val ingredient15: String? = null
 ) {
     fun toDomainCocktail(): Cocktail {
-        val ingredients = mutableListOf<String>()
-        when {
-            ingredient1 != null -> ingredients.add(ingredient1)
-            ingredient2 != null -> ingredients.add(ingredient2)
-            ingredient3 != null -> ingredients.add(ingredient3)
-            ingredient4 != null -> ingredients.add(ingredient4)
-            ingredient5 != null -> ingredients.add(ingredient5)
-            ingredient6 != null -> ingredients.add(ingredient6)
-            ingredient7 != null -> ingredients.add(ingredient7)
-            ingredient8 != null -> ingredients.add(ingredient8)
-            ingredient9 != null -> ingredients.add(ingredient9)
-            ingredient10 != null -> ingredients.add(ingredient10)
-            ingredient11 != null -> ingredients.add(ingredient11)
-            ingredient12 != null -> ingredients.add(ingredient12)
-            ingredient13 != null -> ingredients.add(ingredient13)
-            ingredient14 != null -> ingredients.add(ingredient14)
-            ingredient15 != null -> ingredients.add(ingredient15)
-        }
+        val ingredientsList = mutableListOf<String>()
+
+        if (ingredient1 != null) ingredientsList.add(ingredient1.lowercase())
+        if (ingredient2 != null) ingredientsList.add(ingredient2.lowercase())
+        if (ingredient3 != null) ingredientsList.add(ingredient3.lowercase())
+        if (ingredient4 != null) ingredientsList.add(ingredient4.lowercase())
+        if (ingredient5 != null) ingredientsList.add(ingredient5.lowercase())
+        if (ingredient6 != null) ingredientsList.add(ingredient6.lowercase())
+        if (ingredient7 != null) ingredientsList.add(ingredient7.lowercase())
+        if (ingredient8 != null) ingredientsList.add(ingredient8.lowercase())
+        if (ingredient9 != null) ingredientsList.add(ingredient9.lowercase())
+        if (ingredient10 != null) ingredientsList.add(ingredient10.lowercase())
+        if (ingredient11 != null) ingredientsList.add(ingredient11.lowercase())
+        if (ingredient12 != null) ingredientsList.add(ingredient12.lowercase())
+        if (ingredient13 != null) ingredientsList.add(ingredient13.lowercase())
+        if (ingredient14 != null) ingredientsList.add(ingredient14.lowercase())
+        if (ingredient15 != null) ingredientsList.add(ingredient15.lowercase())
+
+        val ingredientsString = ingredientsList.joinToString(separator = ", ")
         return Cocktail(
             alcoholic,
             category,
@@ -73,7 +74,7 @@ data class CocktailRemote(
             imageUrl,
             glass,
             instructions,
-            ingredients
+            ingredientsString
         )
     }
 }
