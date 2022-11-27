@@ -3,93 +3,133 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/image_cocktail"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="300dp"
         android:scaleType="centerCrop"
-        tools:src="@drawable/placeholder"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".40"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/placeholder" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_cocktail"
+        style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/TextAppearance.AppCompat.Title"
         android:padding="@dimen/medium_padding"
-        app:layout_constraintTop_toBottomOf="@id/image_cocktail"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="Amaretto Shake"/>
+        app:layout_constraintTop_toBottomOf="@id/image_cocktail"
+        tools:text="Amaretto Shake" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_category_title"
+        style="@style/TextAppearance.AppCompat.Subhead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/medium_padding"
+        android:paddingBottom="@dimen/medium_padding"
+        android:text="@string/category"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_cocktail" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_category"
+        style="@style/TextAppearance.AppCompat.Subhead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/medium_padding"
         android:paddingBottom="@dimen/medium_padding"
-        style="@style/TextAppearance.AppCompat.Subhead"
-        android:text="@string/category"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_cocktail"/>
+        app:layout_constraintStart_toEndOf="@+id/text_category_title"
+        app:layout_constraintTop_toBottomOf="@+id/text_cocktail"
+        tools:text="Cocktail" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text_alcoholic"
+        android:id="@+id/text_alcoholic_title"
+        style="@style/TextAppearance.AppCompat.Subhead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/medium_padding"
         android:paddingBottom="@dimen/medium_padding"
-        style="@style/TextAppearance.AppCompat.Subhead"
         android:text="@string/alcoholic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_category"/>
+        app:layout_constraintTop_toBottomOf="@+id/text_category_title" />
 
+    <TextView
+        android:id="@+id/text_alcoholic"
+        style="@style/TextAppearance.AppCompat.Subhead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/text_alcoholic_title"
+        app:layout_constraintTop_toBottomOf="@id/text_category_title"
+        tools:text="Yes" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_glass_title"
+        style="@style/TextAppearance.AppCompat.Subhead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/medium_padding"
+        android:paddingBottom="@dimen/medium_padding"
+        android:text="@string/glass"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_alcoholic_title" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_glass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/TextAppearance.AppCompat.Subhead"
+        app:layout_constraintStart_toEndOf="@id/text_glass_title"
+        app:layout_constraintTop_toBottomOf="@id/text_alcoholic_title"
+        tools:text="Small glass" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_ingredients_title"
+        style="@style/TextAppearance.AppCompat.Subhead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/medium_padding"
         android:paddingBottom="@dimen/medium_padding"
-        style="@style/TextAppearance.AppCompat.Subhead"
-        android:text="@string/glass"
+        android:text="@string/ingredients"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_alcoholic"/>
+        app:layout_constraintTop_toBottomOf="@+id/text_glass_title" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_ingredients"
+        style="@style/TextAppearance.AppCompat.Subhead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/medium_padding"
-        android:paddingBottom="@dimen/medium_padding"
-        style="@style/TextAppearance.AppCompat.Subhead"
-        android:text="@string/ingredients"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_glass"/>
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/text_ingredients_title"
+        app:layout_constraintTop_toBottomOf="@id/text_glass_title"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="Long list of ingredients" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_title_instructions"
+        style="@style/TextAppearance.AppCompat.Headline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/medium_padding"
-
-        style="@style/TextAppearance.AppCompat.Headline"
         android:text="@string/instructions_title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_ingredients"/>
+        app:layout_constraintTop_toBottomOf="@+id/text_ingredients" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_instructions"
+        style="@style/TextAppearance.AppCompat.Subhead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/medium_padding"
         android:paddingBottom="@dimen/medium_padding"
-        style="@style/TextAppearance.AppCompat.Subhead"
-        tools:text="@string/instructions_for_tools"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_title_instructions"/>
+        app:layout_constraintTop_toBottomOf="@+id/text_title_instructions"
+        tools:text="@string/instructions_for_tools" />
 </androidx.constraintlayout.widget.ConstraintLayout>
