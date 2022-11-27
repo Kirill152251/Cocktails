@@ -1,10 +1,12 @@
-package com.cocktails.presentation.di
+package com.cocktails.presentation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.cocktails.R
 import com.cocktails.databinding.RandomCocktailBinding
 import com.cocktails.domain.Cocktail
 
@@ -26,7 +28,12 @@ class Adapter : ListAdapter<Cocktail, Adapter.ViewHolder>(ItemCallback) {
             textAlcoholic.text = cocktail.alcoholic
             textCocktail.text = cocktail.name
             textGlass.text = cocktail.glass
-            textTitleInstructions.text = cocktail.instructions
+            textInstructions.text = cocktail.instructions
+            textIngredients.text = cocktail.ingredients
+            imageCocktail.load(cocktail.imageUrl) {
+                crossfade(true)
+                placeholder(R.drawable.placeholder)
+            }
         }
     }
 
