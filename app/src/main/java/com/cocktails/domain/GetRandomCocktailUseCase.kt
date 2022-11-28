@@ -7,7 +7,6 @@ import javax.inject.Inject
 class GetRandomCocktailUseCase @Inject constructor(
     private val repository: CocktailsRepository
 ) {
-    suspend fun execute(): Flow<ApiResult<Cocktail>> {
-        return repository.getRandomCocktail()
-    }
+
+    val cocktail: Flow<ApiResult<Cocktail>> = repository.getRandomCocktail()
 }

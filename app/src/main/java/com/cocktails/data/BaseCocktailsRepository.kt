@@ -14,7 +14,7 @@ class BaseCocktailsRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource
 ): CocktailsRepository {
 
-    override suspend fun getRandomCocktail(): Flow<ApiResult<Cocktail>> {
+    override fun getRandomCocktail(): Flow<ApiResult<Cocktail>> {
         return remoteDataSource.fetchCocktail()
     }
 
