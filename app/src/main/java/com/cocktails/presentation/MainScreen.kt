@@ -1,11 +1,11 @@
 package com.cocktails.presentation
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -13,10 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.cocktails.R
 import com.cocktails.databinding.FragmentMainScreenBinding
-import com.cocktails.domain.ApiResult
-import com.cocktails.presentation.di.Adapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -39,30 +36,46 @@ class MainScreen : Fragment(R.layout.fragment_main_screen) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.rv.adapter = adapter
-        binding.rv.layoutManager = GridLayoutManager(requireContext(), 1)
-        bindUI()
-        binding.swipeRefresh.setOnRefreshListener {
-            bindUI()
+        binding.apply {
+            rv.adapter = adapter
+            rv.layoutManager = GridLayoutManager(requireContext(), 1)
+            swipeRefreshLayout.setOnRefreshListener {
+                viewModel.setIntent(MainScreenIntent.PullToRefresh)
+                swipeRefreshLayout.isRefreshing = false
+            }
+            btnRetry.setOnClickListener {
+                viewModel.setIntent(MainScreenIntent.OnRetry)
+            }
         }
-
+        bindUI()
+        viewModel.setIntent(MainScreenIntent.GetRandomCocktail)
     }
 
     private fun bindUI() {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.cocktail().collectLatest { data ->
-                    when (data) {
-                        is ApiResult.Error -> {
-                            Log.d("DEBUG", "${data.message}")
-                        }
-                        is ApiResult.Success -> {
+                viewModel.state.collect { state ->
+                    when(state){
+                        MainScreenState.Error -> {
                             binding.apply {
-                                adapter.submitList(listOf(data.result))
+                                progressBar.isVisible = false
+                                btnRetry.isVisible = true
+                                rv.isVisible = true
                             }
                         }
-                        ApiResult.Loading -> {
-
+                        MainScreenState.Loading -> {
+                            adapter.submitList(emptyList())
+                            binding.apply {
+                                progressBar.isVisible = true
+                                btnRetry.isVisible = false
+                            }
+                        }
+                        is MainScreenState.RndCocktail -> {
+                            adapter.submitList(listOf(state.cocktail))
+                            binding.apply {
+                                progressBar.isVisible = false
+                                btnRetry.isVisible = false
+                            }
                         }
                     }
                 }
