@@ -2,11 +2,11 @@ package com.cocktails.presentation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.cocktails.R
 import com.cocktails.databinding.RandomCocktailBinding
 import com.cocktails.domain.Cocktail
 
@@ -23,6 +23,7 @@ class Adapter : ListAdapter<Cocktail, Adapter.ViewHolder>(ItemCallback) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val cocktail = getItem(position)
+
         holder.binding.apply {
             textCategory.text = cocktail.category
             textAlcoholic.text = cocktail.alcoholic
@@ -31,8 +32,14 @@ class Adapter : ListAdapter<Cocktail, Adapter.ViewHolder>(ItemCallback) {
             textInstructions.text = cocktail.instructions
             textIngredients.text = cocktail.ingredients
             imageCocktail.load(cocktail.imageUrl) {
-                crossfade(true)
-                placeholder(R.drawable.placeholder)
+                listener(
+                    onStart = {
+                        holder.binding.progressBarImage.isVisible = true
+                    },
+                    onSuccess = { _, _ ->
+                        holder.binding.progressBarImage.isVisible = false
+                    }
+                )
             }
         }
     }
